@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <!-- Incluindo o Bootstrap 5 via CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/inicio">AEP GAME</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          
+        </ul>
+        <button type="button" onclick="window.location.href='/login'" class="m-2 btn btn-primary">Logar</button>
+        <button type="button" onclick="window.location.href='/cadastro'" class="btn btn-light">Cadastro</button>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- Conteúdo principal -->
+  <div class="z-0 d-flex align-items-center justify-content-center" style="background-image: url('/images/background_Jogo.png'); 
+         background-size: cover; background-position: center; 
+         height: 100vh;">
+
+    <div class="z-1 container d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+      <div class="card shadow-sm" style="width: 100%; max-width: 400px;">
+        <div class="card-body">
+          <h2 class="mb-4 text-center">Login</h2>
+          <form action="/login" method="POST">
+            <div class="mb-3">
+              <label for="email" class="form-label">E-mail:</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu E-mail" required>
+            </div>
+            <div class="mb-3">
+              <label for="pass" class="form-label">Senha:</label>
+              <input type="password" class="form-control" id="pass" name="pass" placeholder="Digite sua senha" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts do Bootstrap 5 -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+-- APENAS UMA DEMONSTRAÇÃO DO QUE INSERIR PARA VALIDAÇÃO
+
+insert into user ( name, email, password, role, isActive)
+values ("NOME", "EMAIL@gmail.com", "1234", "admin", true)
+
+insert into category (name, description, isActive) 
+values ("NOME_CATEGORIA", "DESCRIPTION", true)

@@ -6,14 +6,11 @@ import axios from 'axios';
 const app = express();
 const port = 3001;
 
-// Configurar o EJS como motor de visualização
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-
-// Configure 'src' como a pasta de arquivos estáticos
+// Middleware para pasta de arquivos estáticos 'src'
 app.use(express.static('src'));
-
 // Middleware para processar dados de formulários
 app.use(express.urlencoded({ extended: true }));
 // Middleware para receber dados em JSON (ex: AJAX)
@@ -23,13 +20,12 @@ app.use(cookieParser());
 // Middleware para arquivos estáticos (opcional)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Rota principal
+//Rota principal
 app.get('/inicio', async (req, res) => {
-  
-
   res.render('index2');
 });
 
+//Rota após logado
 app.get('/', async (req, res) => {
   const access_token = req.cookies.access_token;
 
@@ -44,12 +40,12 @@ app.get('/', async (req, res) => {
   res.render('index', { usuario: response.data});
 });
 
-// Rota GET para exibir o formulário de cadastro
+//Rota GET para exibir o formulário de cadastro
 app.get('/cadastro', async (req, res) => {
   res.render('cadastro');
 });
 
-// Rota POST para processar o cadastro
+//Rota POST para processar o cadastro
 app.post('/cadastro', async (req, res) => {
   const { name, email, password, phone } = req.body;
   console.log("Nome:",name,"Email:",email,"Senha:",password, "Phone:", phone);
@@ -67,7 +63,7 @@ app.post('/cadastro', async (req, res) => {
   console.log("Email PASSANDO:",email);
   const response1 = await axios.post("http://localhost:3000/auth/verifyEmail", {
     email: email,
-  });
+  },);
   
   console.log("Passou");
 
@@ -78,15 +74,17 @@ app.post('/cadastro', async (req, res) => {
   res.redirect(`/desejaVerificarEmail`);
 });
 
-
+//Rota para escolha do usuario, se ele deseja inserir o segundo email
 app.get('/desejaVerificarEmail', async (req, res) => {
   res.render('desejaVerificarEmail');
 });
 
+//Rota GET para exibir o formulário de inserção do segundo email
 app.get('/verificarSegundoEmail', async (req, res) => {
   res.render('verificarSegundoEmail');
 });
 
+//Rota POST para processar o formulário de inserção do segundo email
 app.post(`/verificarSegundoEmail`, async (req, res) => {
   const email = req.body.email;
   const firstMail = req.cookies.email;
@@ -107,10 +105,12 @@ app.post(`/verificarSegundoEmail`, async (req, res) => {
   res.redirect(`/desejaVerificarTelefone`);
 });
 
+//Rota para escolha do usuario, se ele deseja verificar o telefone inserido
 app.get('/desejaVerificarTelefone', async (req, res) => {
   res.render('desejaVerificarTelefone');
 });
 
+//Rota que pega os cookies e manda para um "SMS" que irá aparecer no terminal que estiver rodando a api
 app.get(`/verificarTelefone`, async (req, res) => {
   
   const email = req.cookies.email;
@@ -126,10 +126,12 @@ app.get(`/verificarTelefone`, async (req, res) => {
   res.redirect(`/codigoTelefone`);
 });
 
+//Rota GET para exibir o formulario para o usuario inserir o código
 app.get(`/codigoTelefone`, async (req, res) => {
   res.render('codigoTelefone');
 });
 
+//Rota POST para processar o formulário da inserção do código
 app.post(`/codigoTelefone`, async (req, res) => {
   const email = req.cookies.email;
   const code = req.body.code;
